@@ -1,1 +1,1 @@
-# receipt
+# ok receipt app

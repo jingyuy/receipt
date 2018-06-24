@@ -1,0 +1,26 @@
+*.iml
+
+# gradle
+.gradle
+
+/local.properties
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+
+#Google ML Kit
+/app/google-services.json
+
+# Intellij
+*.iml
+.idea/*
+**/.idea/**
+!.idea/.requiredPresidioPluginVersion
+!.idea/.hexReplaceInputFiles
+!.idea/codeStyleSettings.xml
+!.idea/codeStyles/Project.xml
+!.idea/codeStyles/codeStyleConfig.xml
+!.idea/uber/uberPluginConfig.properties
+local.properties
+/captures

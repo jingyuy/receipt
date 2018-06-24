@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Receipts</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_settings">Settings</string>
+    <string name="failed_to_create_image_file">Failed to create image file.</string>
+    <string name="failed_to_process_photos">Failed to process photos.</string>
+    <string name="finish_processing_photos">Finish processing photos.</string>
+    <string name="removed_from_receipt">Removed from receipt!</string>
+    <string name="receipt_removed">Receipt removed!</string>
+    <string name="title_activity_receipt">Receipts</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="undo">UNDO</string>
+</resources>

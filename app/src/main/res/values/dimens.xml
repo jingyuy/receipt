@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="receipt_image_view_size">100dp</dimen>
+    <dimen name="receipt_image_view_size_for_recognition">500dp</dimen>
+    <dimen name="space_1x">8dp</dimen>
+</resources>
