@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/background_light">
         <ImageView
-            android:id="@+id/receipt_image"
+            android:id="@+id/receipt_image_imageview"
             android:layout_width="@dimen/receipt_image_view_size"
             android:layout_height="@dimen/receipt_image_view_size"
             android:scaleType="centerInside"/>

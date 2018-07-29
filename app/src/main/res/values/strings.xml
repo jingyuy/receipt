@@ -6,8 +6,10 @@
     <string name="failed_to_process_photos">Failed to process photos.</string>
     <string name="finish_processing_photos">Finish processing photos.</string>
     <string name="removed_from_receipt">Removed from receipt!</string>
+    <string name="receipt_details_amount">Amount</string>
     <string name="receipt_removed">Receipt removed!</string>
     <string name="title_activity_receipt">Receipts</string>
+    <string name="title_activity_receipt_details">Receipt Details</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="undo">UNDO</string>
 </resources>

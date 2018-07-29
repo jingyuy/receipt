@@ -4,6 +4,7 @@ import android.app.Application;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -15,6 +16,7 @@ import com.google.firebase.ml.vision.text.FirebaseVisionTextDetector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import dui.com.receipt.db.Block;
 import dui.com.receipt.db.Photo;
@@ -57,10 +59,16 @@ public class ProcessReceiptsAsyncTask extends AsyncTask<Void, Receipt, Void> {
     }
 
     private void processPhoto(final Photo photo) {
-        int scaleFactor = PhotoUtil.getScaleFactor(application, photo.pathName);
+        // Get the dimensions of the View
+        int targetW = application.getResources().getDimensionPixelSize(R.dimen.receipt_image_view_size_for_recognition);
+        int targetH = application.getResources().getDimensionPixelSize(R.dimen.receipt_image_view_size_for_recognition);
+        int scaleFactor = PhotoUtil.getScaleFactor(application, photo.pathName, targetW, targetH);
         Bitmap bitmap = PhotoUtil.getBitmap(photo.pathName, scaleFactor);
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
         FirebaseVisionTextDetector detector = FirebaseVision.getInstance().getVisionTextDetector();
+        Log.i("!!!!!!!!", "photo");
+        Log.i("!!!!!!!!", String.format(Locale.getDefault(), "width: %d, height: %d", image.getBitmapForDebugging()
+                        .getWidth(), image.getBitmapForDebugging().getHeight()));
         detector.detectInImage(image)
                 .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
                     @Override

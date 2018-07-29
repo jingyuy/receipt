@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light">
+        <ImageView
+            android:id="@+id/receipt_details_image_imageview"
+            android:layout_width="@dimen/receipt_image_view_size_for_recognition"
+            android:layout_height="@dimen/receipt_image_view_size_for_recognition"
+            android:scaleType="centerInside"/>
+    </FrameLayout>
+</FrameLayout>

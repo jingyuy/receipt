@@ -33,14 +33,22 @@ public class MainActivity extends AppCompatActivity implements ReceiptItemTouchH
         super.onCreate(savedInstanceState);
         mainView = getLayoutInflater().inflate(R.layout.activity_main, null);
         setContentView(mainView);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ReceiptAdapter(this);
         recyclerView.setAdapter(adapter);
+        adapter.clicks().subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long receiptId) throws Exception {
+                Intent intent = new Intent(MainActivity.this, ReceiptDetailsActivity.class);
+                intent.putExtra(ReceiptDetailsActivity.INTENT_EXTRA_RECEIPT_ID, receiptId);
+                startActivity(intent);
+            }
+        });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

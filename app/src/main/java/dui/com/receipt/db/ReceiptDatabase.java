@@ -2,6 +2,7 @@ package dui.com.receipt.db;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.util.Log;
 
 import java.util.List;
 
@@ -34,6 +35,10 @@ public class ReceiptDatabase {
 
     public Single<List<Photo>> getPhotosByReceipt(Receipt receipt) {
         return appDatabase.photoDao().findByReceipt(receipt.receiptId);
+    }
+
+    public Single<List<Photo>> getPhotosByReceiptId(long receiptId) {
+        return appDatabase.photoDao().findByReceipt(receiptId);
     }
 
     public void deleteReceipt(final Receipt receipt) {
@@ -73,6 +78,15 @@ public class ReceiptDatabase {
                 .map(new Function<List<Block>, List<Long>>() {
                     @Override
                     public List<Long> apply(List<Block> blocks) throws Exception {
+                        Log.i("!!!!!!!!", "blocks");
+                        for (Block block : blocks) {
+                            Log.i("!!!!!!!!!", "text: " + block.text);
+                            Log.i("!!!!!!!!!", "left: " + block.left);
+                            Log.i("!!!!!!!!!", "right: " + block.right);
+                            Log.i("!!!!!!!!!", "top: " + block.top);
+                            Log.i("!!!!!!!!!", "bottom: " + block.bottom);
+                            Log.i("!!!!!!!!!!!!", "---------------");
+                        }
                         return appDatabase.blockDao().insertAll(blocks.toArray(new Block[blocks.size()]));
                     }
                 });

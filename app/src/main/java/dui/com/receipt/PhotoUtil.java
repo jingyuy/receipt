@@ -8,11 +8,7 @@ public class PhotoUtil {
 
     private PhotoUtil() { }
 
-    public static int getScaleFactor(Context context, String pathName) {
-        // Get the dimensions of the View
-        int targetW = context.getResources().getDimensionPixelSize(R.dimen.receipt_image_view_size_for_recognition);
-        int targetH = context.getResources().getDimensionPixelSize(R.dimen.receipt_image_view_size_for_recognition);
-
+    public static int getScaleFactor(Context context, String pathName, int targetW, int targetH) {
         // Get the dimensions of the thumbnail
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
