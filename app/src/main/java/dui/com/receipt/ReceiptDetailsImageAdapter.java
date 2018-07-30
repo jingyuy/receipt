@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dui.com.receipt.db.Photo;
+import dui.com.receipt.view.RecognizedViewGroup;
 
 public class ReceiptDetailsImageAdapter extends RecyclerView.Adapter<ReceiptDetailsImageAdapter.ViewHolder> {
     private Context context;
@@ -28,9 +29,11 @@ public class ReceiptDetailsImageAdapter extends RecyclerView.Adapter<ReceiptDeta
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public ImageView imageView;
+        public RecognizedViewGroup recognizedViewGroup;
         public ViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.receipt_details_image_imageview);
+            recognizedViewGroup = itemView.findViewById(R.id.recognized_view_viewgroup);
         }
     }
 
@@ -84,6 +87,7 @@ public class ReceiptDetailsImageAdapter extends RecyclerView.Adapter<ReceiptDeta
             photo.medium = PhotoUtil.getBitmap(photo.pathName, scaleFactor);
         }
         holder.imageView.setImageBitmap(photo.medium);
+        holder.recognizedViewGroup.setBlocks(photo.blocks);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

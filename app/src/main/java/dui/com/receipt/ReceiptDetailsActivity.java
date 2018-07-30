@@ -9,10 +9,13 @@ import android.view.View;
 
 import java.util.List;
 
+import dui.com.receipt.db.Block;
 import dui.com.receipt.db.Photo;
 import dui.com.receipt.db.ReceiptDatabase;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class ReceiptDetailsActivity extends AppCompatActivity {
@@ -36,6 +39,28 @@ public class ReceiptDetailsActivity extends AppCompatActivity {
         imageListView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         ReceiptDatabase.getInstance(this)
                 .getPhotosByReceiptId(receiptId)
+                .flattenAsFlowable(new Function<List<Photo>, Iterable<Photo>>() {
+                    @Override
+                    public Iterable<Photo> apply(List<Photo> photos) throws Exception {
+                        return photos;
+                    }
+                })
+                .flatMapSingle(new Function<Photo, Single<Photo>>() {
+                    @Override
+                    public Single<Photo> apply(final Photo photo) throws Exception {
+                        return ReceiptDatabase.getInstance(ReceiptDetailsActivity.this)
+                                .getPhotoBlocks(photo.photoId)
+                                .map(new Function<List<Block>, Photo>() {
+                                    @Override
+                                    public Photo apply(List<Block> blocks) throws Exception {
+                                        photo.blocks = blocks;
+                                        return photo;
+                                    }
+                                });
+
+                    }
+                })
+                .toList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Photo>>() {

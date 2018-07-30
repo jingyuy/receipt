@@ -73,10 +73,10 @@ public class ProcessReceiptsAsyncTask extends AsyncTask<Void, Receipt, Void> {
                 .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
                     @Override
                     public void onSuccess(FirebaseVisionText firebaseVisionText) {
-                        photo.blocks = firebaseVisionText.getBlocks();
+                        List<FirebaseVisionText.Block> firebaseBlocks = firebaseVisionText.getBlocks();
                         photo.processed = true;
                         List<Block> blocks = new ArrayList<>();
-                        for (FirebaseVisionText.Block currentBlock : photo.blocks) {
+                        for (FirebaseVisionText.Block currentBlock : firebaseBlocks) {
                             if (currentBlock.getBoundingBox() != null) {
                                 Block block = new Block();
                                 block.photoId = photo.photoId;

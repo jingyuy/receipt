@@ -40,21 +40,23 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
         public View backgroundView;
         public RecyclerView recyclerView;
         public ReceiptPhotoAdapter receiptPhotoAdapter;
+        private View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clicks.accept(receiptList.get(getAdapterPosition()).receiptId);
+            }
+        };
+
         public ViewHolder(View itemView) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.photo_recycler_view);
             recyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayoutManager
                     .HORIZONTAL, false));
-            receiptPhotoAdapter = new ReceiptPhotoAdapter(itemView.getContext());
+            receiptPhotoAdapter = new ReceiptPhotoAdapter(itemView.getContext(), onClickListener);
             recyclerView.setAdapter(receiptPhotoAdapter);
             foregroundView = itemView.findViewById(R.id.foreground);
             backgroundView = itemView.findViewById(R.id.background);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clicks.accept(receiptList.get(getAdapterPosition()).receiptId);
-                }
-            });
+            itemView.setOnClickListener(onClickListener);
         }
     }
 

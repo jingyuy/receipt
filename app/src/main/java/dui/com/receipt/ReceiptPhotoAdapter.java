@@ -16,6 +16,7 @@ import dui.com.receipt.db.Photo;
 public class ReceiptPhotoAdapter extends RecyclerView.Adapter<ReceiptPhotoAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Photo> dataset;
+    private View.OnClickListener onClickListener;
 
     public void restore(Photo deletedItem, int deletedIndex) {
         dataset.add(deletedIndex, deletedItem);
@@ -25,19 +26,21 @@ public class ReceiptPhotoAdapter extends RecyclerView.Adapter<ReceiptPhotoAdapte
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
             this.imageView = itemView.findViewById(R.id.receipt_image_imageview);
+            itemView.setOnClickListener(onClickListener);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ReceiptPhotoAdapter(Context context) {
+    public ReceiptPhotoAdapter(Context context, View.OnClickListener onClickListener) {
         this.context = context;
         this.dataset = new ArrayList<>();
+        this.onClickListener = onClickListener;
     }
 
     public void updateItems(List<Photo> photos) {

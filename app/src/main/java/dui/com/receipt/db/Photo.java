@@ -7,8 +7,6 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.graphics.Bitmap;
 
-import com.google.firebase.ml.vision.text.FirebaseVisionText;
-
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class Photo {
     public boolean processed;
 
     @Ignore
-    public List<FirebaseVisionText.Block> blocks;
+    public List<Block> blocks;
 
     @Ignore
     public Bitmap thumbnail;

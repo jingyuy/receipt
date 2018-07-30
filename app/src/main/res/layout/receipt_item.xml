@@ -2,14 +2,16 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingTop="@dimen/space_1x"
+    android:paddingBottom="@dimen/space_1x"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <FrameLayout
         android:id="@+id/background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,6 +23,8 @@
         android:id="@+id/foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_1x"
+        android:paddingBottom="@dimen/space_1x"
         android:background="@android:color/background_light">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/photo_recycler_view"

@@ -63,18 +63,28 @@ public class ReceiptDatabase {
 
     public Single<Integer> updatePhoto(Photo photo) {
         return Single.just(photo)
-                .subscribeOn(Schedulers.io())
                 .map(new Function<Photo, Integer>() {
                     @Override
                     public Integer apply(Photo photo) throws Exception {
                         return appDatabase.photoDao().update(photo);
                     }
-                });
+                })
+                .subscribeOn(Schedulers.io());
+    }
+
+    public Single<List<Block>> getPhotoBlocks(long photoId) {
+        return Single.just(photoId)
+                .flatMap(new Function<Long, Single<List<Block>>>() {
+                    @Override
+                    public Single<List<Block>> apply(Long photoId) throws Exception {
+                        return appDatabase.blockDao().findByPhoto(photoId);
+                    }
+                })
+                .subscribeOn(Schedulers.io());
     }
 
     public Single<List<Long>> savePhotoBlocks(List<Block> blocks) {
         return Single.just(blocks)
-                .subscribeOn(Schedulers.io())
                 .map(new Function<List<Block>, List<Long>>() {
                     @Override
                     public List<Long> apply(List<Block> blocks) throws Exception {
@@ -89,7 +99,8 @@ public class ReceiptDatabase {
                         }
                         return appDatabase.blockDao().insertAll(blocks.toArray(new Block[blocks.size()]));
                     }
-                });
+                })
+                .subscribeOn(Schedulers.io());
     }
 
     public Single<List<Long>> saveReceiptPhotos(List<Photo> photos) {
